@@ -1,50 +1,27 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React, { useState } from 'react';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+import Title from './components/UI/Title';
+import Ball from './components/UI/Ball';
+import Button from './components/UI/Button';
 
-  handleClick = api => e => {
-    e.preventDefault()
+const Answers = ["Yes", "No"];
 
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
+function App() {
 
-  render() {
-    const { loading, msg } = this.state
+  const [answers] = useState(Answers);
 
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
+  let randomValue;
+  const shakeHandler = () => {
+    let randomValue = answers[Math.floor(Math.random() * answers.length)];
+  };
+
+  return (
+    <div id="wrapper">
+      <Title />
+      <Ball value={randomValue} />
+      <Button onClick={shakeHandler}/>
+    </div>
+  );
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;

@@ -1,0 +1,25 @@
+.content{
+    width:300px;
+    height:300px;
+    transform: translateY(-30px);
+    position: relative;
+    &:before{
+        content:"";
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        background: rgb(238,174,202);
+        background: linear-gradient(0deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+        clip-path: polygon(50% 100%, 0 0, 100% 0);
+    }
+
+    span{
+        position: relative;
+        z-index: 1;
+        text-transform: uppercase;
+        color:#ffdef2; 
+        padding-top: 20px;
+    }
+}
